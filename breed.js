@@ -1,51 +1,37 @@
 var generateList = document.getElementById("getBreeds");
 var breeds = document.getElementById("breedList");
-var breedName 
+var genBreeds = document.getElementById('generatedBreeds')
+
 generateList.addEventListener("click", showBreeds);
 
 function showBreeds() {
   var myRequest = new XMLHttpRequest();
 
   myRequest.addEventListener("load", function getBreedPhotos(e) {
-      var myRequestAsText = e.target.response;
-      var myResponseAsAJSON = JSON.parse(myRequestAsText);
-      addBreedList(myResponseAsAJSON.message)
-breedName = myResponseAsAJSON.message
-      console.log(myResponseAsAJSON.message)
-    });
+    var myRequestAsText = e.target.response;
+    var myResponseAsAJSON = JSON.parse(myRequestAsText);
+    addBreedList(myResponseAsAJSON.message);
+  });
   myRequest.open("GET", "https://dog.ceo/api/breeds/list");
   myRequest.send();
-
-
-
 }
-
-
 
 function addBreedList(list) {
-    for (var i = 0; i < list.length; i++) {
-        breeds.innerHTML += "<p>" + list[i] + "</p>";
-      }
-}
-
-generateList.addEventListener("click", showBreedsPhotos);
-
-function showBreedsPhotos () {
+  for (var i = 0; i < list.length; i++) {
     var myRequest = new XMLHttpRequest();
-
-  myRequest.addEventListener("load", function getBreedPhotos(e) {
+    let j = i;
+    myRequest.addEventListener("load", function getBreedPhotos(e) {
+      genBreeds.innerHTML += "<p>" + list[j] + "</p>";
       var myRequestAsText = e.target.response;
       var myResponseAsAJSON = JSON.parse(myRequestAsText);
-      addBreedPhotos(myResponseAsAJSON.message)
-      console.log(myResponseAsAJSON.message[0])
+
+      addBreedPhotos(myResponseAsAJSON.message);
     });
-  myRequest.open("GET", "https://dog.ceo/api/breed/african/images");
-  myRequest.send();
-} 
+    myRequest.open("GET", "https://dog.ceo/api/breed/" + list[i] + "/images");
+    myRequest.send();
+  }
+}
 
-// function addBreedPhotos(list) {
-//     for (var i = 0; i 
-//         breeds.innerHTML += "<img src="+ list[j] + "/>"
-//       }}
-// }
-
+function addBreedPhotos(dogs) {
+  genBreeds.innerHTML += "<img src=" + dogs[0] + ">";
+}

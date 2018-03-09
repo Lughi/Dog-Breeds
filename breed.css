@@ -1,17 +1,17 @@
 header {
   text-align: center;
   font-size: 40px;
- }
+}
 
 body {
-    margin: 0
-    
-    }
+  margin: 0;
+}
 
-div {
-    
-}    
+generatedBreeds {
+    display: inline-block
+}
 img {
-    width: 350px;
-    margin: 18px;
+  height: 270px;
+  width: 350px;
+  margin: 20px;
 }
